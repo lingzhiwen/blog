@@ -104,6 +104,7 @@ theme: geek
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: https://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@github.com/lingzhiwen/blog.git
+  repo: git@github.com:lingzhiwen/blog.git
+  ##https://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@github.com/lingzhiwen/blog.git
   branch: gh-pages
 
