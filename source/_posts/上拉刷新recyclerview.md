@@ -1,6 +1,6 @@
-## 上拉刷新，下拉加载的recyclerView
-
-
+---
+title: 上拉刷新，下拉加载的recyclerView
+---
 
 
 ### 1.上拉刷新的布局文件swipe_header_view
@@ -204,7 +204,8 @@ public final class RecyclerRefreshLayout extends LinearLayout {
                 int disY = (int) Math.abs(ev.getY() - downY);
                 this.rvIsArriveTop = this.isArriveTop(this.contentRv);
                 this.rvIsArriveDown = this.isArriveBottom(this.contentRv);
-                if (!this.isLoadData && disY > disX) {// 只允许纵向下拉刷新，解决嵌套viewpager滑动冲突。
+                /** 只允许纵向下拉刷新，解决嵌套viewpager滑动冲突。 */
+                if (!this.isLoadData && disY > disX) {
                     this.scrollLayout(ev.getY());
                 }
                 this.lastY = ev.getY();
@@ -232,7 +233,6 @@ public final class RecyclerRefreshLayout extends LinearLayout {
 
     private final void scrollLayout(float moveY) {
         float nextScrollY = (float) this.getScrollY() + this.lastY - moveY;
-        Log.d("SwipeLayout", "nextScrollY:" + nextScrollY + " currScrollX:" + this.getScrollX());
         if (this.rvIsArriveTop) {
             this.pullDownScroll(nextScrollY);
         } else if (this.rvIsArriveDown) {

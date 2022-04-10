@@ -1,3 +1,6 @@
+---
+title: python
+---
 1.读取sqlite
 ```
 import sqlite3
