@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>
+        Hexo
+    </title>
+    
+<link rel="stylesheet" href="/libs/highlight/styles/monokai-sublime.css">
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body id="bodyx">
+    <div class="hd posts">
+    <a href="/index.html"><i class="fa fa-reply replay-btn" aria-hidden="true"></i></a>
+    <div class="post-title">
+        <p>
+            Error集锦
+        </p>
+        <hr>
+    </div>
+    <div class="post-content">
+        <h2 id="一-电脑安装过多个版本的jdk导致的错误。"><a href="#一-电脑安装过多个版本的jdk导致的错误。" class="headerlink" title="一.电脑安装过多个版本的jdk导致的错误。"></a>一.电脑安装过多个版本的jdk导致的错误。</h2><h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p>1、先安装了jdk1.7.0_80，后安装了jdk1.8.0_181，环境变量中配置了前者；<br>2、在cmd中输入java -version出现以下错误：Registry key Error: Java version has value ‘1.8’, but ‘1.7’ is required</p>
+<h3 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h3><p>jdk1.7升级到jdk1.8的时候，有三个地方要确认一下：</p>
+<h4 id="1-系统环境变量"><a href="#1-系统环境变量" class="headerlink" title="1.系统环境变量"></a>1.系统环境变量</h4><h4 id="2-注册表"><a href="#2-注册表" class="headerlink" title="2.注册表"></a>2.注册表</h4><p>计算机\HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Runtime Environment</p>
+<h4 id="3-更新-C-Windows-System32-下面的java-exe-javaw-exe-javaws-exe"><a href="#3-更新-C-Windows-System32-下面的java-exe-javaw-exe-javaws-exe" class="headerlink" title="3.更新 C:\Windows\System32 下面的java.exe javaw.exe javaws.exe"></a>3.更新 C:\Windows\System32 下面的java.exe javaw.exe javaws.exe</h4><p>安装1.7的时候 没问题；在安装1.8，修改环境变量后，C:\Windows\System32 下面的java.exe javaw.exe javaws.exe 还是1.7安装包里面的。</p>
+<h4 id="将1-7的java-exe-替换这几个文件为java1-8的就好。"><a href="#将1-7的java-exe-替换这几个文件为java1-8的就好。" class="headerlink" title="将1.7的java.exe 替换这几个文件为java1.8的就好。"></a><strong>将1.7的java.exe 替换这几个文件为java1.8的就好。</strong></h4><h2 id="二-Kotlin-中使用AspectJ"><a href="#二-Kotlin-中使用AspectJ" class="headerlink" title="二.Kotlin 中使用AspectJ"></a>二.Kotlin 中使用AspectJ</h2><h3 id="问题描述：-1"><a href="#问题描述：-1" class="headerlink" title="问题描述："></a>问题描述：</h3><p>java.util.zip.ZipException: zip file is empty</p>
+<h3 id="解决方案：-1"><a href="#解决方案：-1" class="headerlink" title="解决方案："></a>解决方案：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">build.gradle增加如下配置：</span><br><span class="line">android &#123;</span><br><span class="line">...</span><br><span class="line">    aspectjx &#123;</span><br><span class="line">        exclude &#x27;versions.9&#x27;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+    </div>
+
+    
+        <hr class="fhr">
+        <div id="vcomments"></div>
+    
+</div>
+    <div class="footer" id="footer">
+    <p>Copyright © 2022 <a class="flink" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>.
+        <label class="el-switch el-switch-green el-switch-sm" style="vertical-align: sub;">
+            <input type="checkbox" name="switch" id="update_style">
+            <span class="el-switch-style"></span>
+        </label>
+<!--         <script type="text/javascript">
+        var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_1278548644'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/stat.php%3Fid%3D1278548644%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+        </script> -->
+    </p>
+</div>
+<input type="hidden" id="web_style" value="black">
+<input type="hidden" id="valine_appid" value="uSAMAGFceyOOgNeJHudPxcAP-gzGzoHsz">
+<input type="hidden" id="valine_appKey" value="JeTNBu6ko9aHCDetzbK2jjDK">
+
+<script src="/libs/jquery.min.js"></script>
+
+
+<script src="/libs/highlight/highlight.pack.js"></script>
+
+<script src='//cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+
+<script src="/js/js.js"></script>
+
+<style type="text/css">
+.v * {
+    color: #698fca;
+}
+
+.v .vlist .vcard .vhead .vsys {
+    color: #3a3e4a;
+}
+
+.v .vlist .vcard .vh .vmeta .vat {
+    color: #638fd5;
+}
+
+.v .vlist .vcard .vhead .vnick {
+    color: #6ba1ff;
+}
+
+.v a {
+    color: #8696b1;
+}
+
+.v .vlist .vcard .vhead .vnick:hover {
+    color: #669bfc;
+}
+</style>
+</body>
+
+</html>
