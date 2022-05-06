@@ -60,7 +60,7 @@
 
 
 <p>查看正在运行的应用程序</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell ps|findstr com.company.demo</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb shell ps|findstr com.company.demo</span><br><span class="line">adb shell ps|grep com.company.demo</span><br></pre></td></tr></table></figure>
 
 <p>查看正在运行的服务</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dumpsys activity services | grep DemoService</span><br></pre></td></tr></table></figure>

@@ -66,7 +66,10 @@
 <li>打包：<br>用windows工具打包固件，屏蔽AndroidTool\rockdev\package-file文件中的<br>#trust       Image/trust.img.</li>
 <li>Git 已经删除，请自行创建。<br>请自行编写脚本或者参考1.make_rom.sh,uild_base.sh ,2.clean_all.sh,3.clean_app.sh。<br>编译环境 详见 RK3128 Android7.1 软件开发指南V1.00-20170823。<br>工具在SDK/RKTools 目录下</li>
 </ul>
-<p>10.编译过程遇到的问题：</p>
+<p>10.framework.jar的位置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">out/target/common/obj/JAVA_LIBRARIES/framework_intermediates/classes.jar</span><br></pre></td></tr></table></figure>
+
+<p>11.编译过程遇到的问题：</p>
 <ul>
 <li><p>lex:aidl&lt;=system/tools/aidl/aidl_language_I.II FAILED:/</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export LC_ALL=C</span><br></pre></td></tr></table></figure></li>
