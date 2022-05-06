@@ -58,6 +58,7 @@ adb root 、 adb remount 、 adb pull data/logs  + 电脑本地路径
 
 ```
 adb shell ps|findstr com.company.demo
+adb shell ps|grep com.company.demo
 ```
 
 查看正在运行的服务

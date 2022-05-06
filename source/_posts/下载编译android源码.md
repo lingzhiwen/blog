@@ -89,7 +89,12 @@ make otapackage -j32
   编译环境 详见 RK3128 Android7.1 软件开发指南V1.00-20170823。
   工具在SDK/RKTools 目录下
 
-10.编译过程遇到的问题：
+10.framework.jar的位置：
+```
+out/target/common/obj/JAVA_LIBRARIES/framework_intermediates/classes.jar
+```
+
+11.编译过程遇到的问题：
 
 - lex:aidl<=system/tools/aidl/aidl_language_I.II FAILED:/
 

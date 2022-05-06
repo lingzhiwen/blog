@@ -31,7 +31,7 @@
     <div class="post-content">
         <p>RK3128 编译</p>
 <p>1.环境配置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openjdk-8-jdk</span><br><span class="line"></span><br><span class="line">export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar</span><br><span class="line">java -version</span><br><span class="line"></span><br><span class="line">sudo apt-get install git  gnupg flex bison gperf build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 lib32ncurses-dev x11proto-core-dev libx11-dev lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc unzip</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openjdk-8-jdk</span><br><span class="line">export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar</span><br><span class="line">java -version</span><br><span class="line">sudo apt-get install git  gnupg flex bison gperf build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 lib32ncurses-dev x11proto-core-dev libx11-dev lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc unzip</span><br></pre></td></tr></table></figure>
 
 
 
@@ -46,7 +46,7 @@
 
 
 <p>4.编译系统：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cd ..</span><br><span class="line"></span><br><span class="line">source build/envsetup.sh</span><br><span class="line">make clean</span><br><span class="line">make installclean</span><br><span class="line">source build/envsetup.sh</span><br><span class="line">lunch rk3128_box-userdebug</span><br><span class="line">make -j32</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd ..</span><br><span class="line">source build/envsetup.sh</span><br><span class="line">make clean</span><br><span class="line">make installclean</span><br><span class="line">source build/envsetup.sh</span><br><span class="line">lunch rk3128_box-userdebug</span><br><span class="line">make -j32</span><br></pre></td></tr></table></figure>
 
 <p>5.编译后一定要执行,确认oem\system\目录下文件是否拷贝覆盖到out\target\product\rk3128_box\system目录下。 </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -rf oem/system/* out/target/product/$TARGET_PRODUCT/system/</span><br></pre></td></tr></table></figure>
@@ -71,9 +71,11 @@
 <li><p>lex:aidl&lt;=system/tools/aidl/aidl_language_I.II FAILED:/</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export LC_ALL=C</span><br></pre></td></tr></table></figure></li>
 <li><p>Ensure Jack service is installed and started</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.从/etc/java-8-openjdk/security/java.security中找到jdk.tls.disabledAlgorithms取消TLSv1, TLSv1.1 禁用; </span><br><span class="line"></span><br><span class="line">2.检查jack 服务是否启动</span><br><span class="line">cd prebuilts/sdk/tools</span><br><span class="line">./jack-admin start-server/stop-server/kill-server</span><br></pre></td></tr></table></figure></li>
+<li><p> error while loading shared libraries:libncurses.so.5</p>
 </li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.从/etc/java-8-openjdk/security/java.security中找到jdk.tls.disabledAlgorithms取消TLSv1, TLSv1.1 禁用; </span><br><span class="line"></span><br><span class="line">2.检查jack 服务是否启动</span><br><span class="line">cd prebuilts/sdk/tools</span><br><span class="line">./jack-admin start-server/stop-server/kill-server</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install libncurses5</span><br></pre></td></tr></table></figure>
 
 
     </div>
