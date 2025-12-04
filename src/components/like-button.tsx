@@ -1,10 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
-import useSWR from 'swr'
 import { motion, AnimatePresence } from 'motion/react'
 import { Heart } from 'lucide-react'
 import clsx from 'clsx'
 import { cn } from '@/lib/utils'
-import { toast } from 'sonner'
 
 type LikeButtonProps = {
 	slug?: string
@@ -12,13 +10,13 @@ type LikeButtonProps = {
 	delay?: number
 }
 
-const ENDPOINT = 'https://blog-liker.yysuni1001.workers.dev/api/like'
-
-export default function LikeButton({ slug = 'yysuni', delay, className }: LikeButtonProps) {
+export default function LikeButton({ slug = 'sunny', delay, className }: LikeButtonProps) {
 	const [liked, setLiked] = useState(false)
 	const [show, setShow] = useState(false)
 	const [justLiked, setJustLiked] = useState(false)
 	const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number }>>([])
+	// 添加本地状态来模拟点赞数
+	const [count, setCount] = useState<number>(0)
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -33,24 +31,15 @@ export default function LikeButton({ slug = 'yysuni', delay, className }: LikeBu
 		}
 	}, [justLiked])
 
-	const fetcher = useCallback(async (url: string): Promise<number | null> => {
-		const res = await fetch(url, { method: 'GET', cache: 'no-store' })
-		if (!res.ok) return null
-		const data = await res.json().catch(() => ({}))
-		return typeof data?.count === 'number' ? data.count : null
-	}, [])
-
-	const { data: fetchedCount, mutate } = useSWR(slug ? `${ENDPOINT}?slug=${encodeURIComponent(slug)}` : null, fetcher, {
-		revalidateOnFocus: false,
-		dedupingInterval: 1000 * 10
-	})
-
-	const handleLike = useCallback(async () => {
+	// 修改 handleLike 函数，移除 API 调用
+	const handleLike = useCallback(() => {
 		if (!slug) return
 		setLiked(true)
 		setJustLiked(true)
+		// 本地增加点赞数
+		setCount(prevCount => prevCount + 1)
 
-		// Create particle effects
+		// 保留粒子效果
 		const newParticles = Array.from({ length: 6 }, (_, i) => ({
 			id: Date.now() + i,
 			x: Math.random() * 60 - 30,
@@ -58,22 +47,9 @@ export default function LikeButton({ slug = 'yysuni', delay, className }: LikeBu
 		}))
 		setParticles(newParticles)
 
-		// Clear particles after animation
+		// 清除粒子效果
 		setTimeout(() => setParticles([]), 1000)
-
-		try {
-			const url = `${ENDPOINT}?slug=${encodeURIComponent(slug)}`
-			const res = await fetch(url, { method: 'POST' })
-			const data = await res.json().catch(() => ({}))
-			if (data.reason == 'rate_limited') toast('谢谢啦😘，今天已经不能再点赞啦💕')
-			const value = typeof data?.count === 'number' ? data.count : (fetchedCount ?? 0) + 1
-			await mutate(value, { revalidate: false })
-		} catch {
-			// ignore
-		}
-	}, [slug, fetchedCount, mutate])
-
-	const count = typeof fetchedCount === 'number' ? fetchedCount : null
+	}, [slug])
 
 	if (show)
 		return (
@@ -104,17 +80,15 @@ export default function LikeButton({ slug = 'yysuni', delay, className }: LikeBu
 					))}
 				</AnimatePresence>
 
-				{typeof count === 'number' && (
-					<motion.span
-						initial={{ scale: 0.4 }}
-						animate={{ scale: 1 }}
-						className={cn(
-							'absolute -top-2 left-9 min-w-6 rounded-full px-1.5 py-1 text-center text-xs text-white tabular-nums',
-							liked ? 'bg-rose-400' : 'bg-gray-300'
-						)}>
-						{count}
-					</motion.span>
-				)}
+				<motion.span
+					initial={{ scale: 0.4 }}
+					animate={{ scale: 1 }}
+					className={cn(
+						'absolute -top-2 left-9 min-w-6 rounded-full px-1.5 py-1 text-center text-xs text-white tabular-nums',
+						liked ? 'bg-rose-400' : 'bg-gray-300'
+					)}>
+					{count}
+				</motion.span>
 				<motion.div animate={justLiked ? { scale: [1, 1.4, 1], rotate: [0, -10, 10, 0] } : {}} transition={{ duration: 0.6, ease: 'easeOut' }}>
 					<Heart className={clsx('heartbeat', liked ? 'fill-rose-400 text-rose-400' : 'fill-rose-200 text-rose-200')} size={28} />
 				</motion.div>
